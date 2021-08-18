@@ -5,16 +5,18 @@ using UnityEngine;
 public class RepeatBackground : MonoBehaviour
 {
   private Vector3 startPosition;
+  private float repeatPosition;
     // Start is called before the first frame update
     void Start()
   {
     startPosition = transform.position;
+    repeatPosition = GetComponent<BoxCollider>().size.x / 2;
   }
 
   // Update is called once per frame
   void Update()
   {
-    if (transform.position.x < startPosition.x - 50.0f)
+    if (transform.position.x < startPosition.x - repeatPosition)
     {
       transform.position = startPosition;
     }
