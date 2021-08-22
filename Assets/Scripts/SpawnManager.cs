@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-  public GameObject obsticalPrefab;
+  public GameObject[] obsticalPrefab;
   public float startDelay = 2.0f;
   public float repeatRate = 2.0f;
-  private Vector3 spawnPosition = new Vector3(25, 0, 0);
+  private Vector3 spawnPosition;
   private PlayerController playerControllerScript;
   // Start is called before the first frame update
   void Start()
@@ -26,7 +26,18 @@ public class SpawnManager : MonoBehaviour
   {
     if (playerControllerScript.gameOver == false)
     {
-      Instantiate(obsticalPrefab, spawnPosition, obsticalPrefab.transform.rotation);
+      int obsticalIndex = Random.Range(0, 3);
+
+      if (obsticalIndex == 2)
+      {
+        spawnPosition = new Vector3(25, 4, 0);
+      } 
+      else
+      {
+          spawnPosition = new Vector3(25, 0, 0);
+      }
+
+      Instantiate(obsticalPrefab[obsticalIndex], spawnPosition, obsticalPrefab[obsticalIndex].transform.rotation);
     }
   }
 }
