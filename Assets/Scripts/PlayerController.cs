@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
   private MoveLeft moveLeftScript;
   public int score;
   public float gameTime;
+  public bool isRunning = false;
   // Start is called before the first frame update
   void Start()
   {
@@ -39,13 +40,30 @@ public class PlayerController : MonoBehaviour
       playerAudio.PlayOneShot(jumpSound, 4.0f);
     }
 
+    if (Input.GetKey(KeyCode.F) && !gameOver)
+    {
+      isRunning = true;
+    }
+    else
+    {
+      isRunning = false;
+    }
+
     gameTime += Time.deltaTime;
-      if (gameTime >= 1 && !gameOver)
+    if (gameTime >= 1 && !gameOver)
+    {
+      if (!isRunning)
       {
         score += 1;
         gameTime = 0.0f;
         Debug.Log("Score = " + score);
       }
+      else if (isRunning)
+      {
+        score += 3;
+        gameTime = 0.0f;
+      }
+    }
   }
 
   private void OnCollisionEnter(Collision collision)

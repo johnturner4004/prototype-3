@@ -27,6 +27,8 @@ public class SpawnManager : MonoBehaviour
     if (playerControllerScript.gameOver == false)
     {
       int obsticalIndex = Random.Range(0, 3);
+      playerControllerScript.score += obsticalIndex * 5;
+      Debug.Log("Score = " + playerControllerScript.score);
 
       if (obsticalIndex == 2)
       {
