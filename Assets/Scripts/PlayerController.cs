@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
   public int score;
   public float gameTime;
   public bool isRunning = false;
+  // public Vector3 startPosition = new Vector3(-4, 0, 0);
+  public Vector3 runPosition = new Vector3(2, 0, 0);
   // Start is called before the first frame update
   void Start()
   {
@@ -26,42 +28,63 @@ public class PlayerController : MonoBehaviour
     Physics.gravity *= gravityModifier;
     playerAnimator = GetComponent<Animator>();
     playerAudio = GetComponent<AudioSource>();
+    moveLeftScript = GameObject.Find("Background").GetComponent<MoveLeft>();
   }
 
   // Update is called once per frame
   void Update()
   {
-    if (Input.GetKeyDown(KeyCode.Space) && isOnGround > 0 && !gameOver)
+    // if (transform.position.x >= 2)
+    // {
+    //   moveLeftScript.isWalking = false;
+    // }
+    if (moveLeftScript.isWalking)
     {
-      playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-      isOnGround -= 1;
-      playerAnimator.SetTrigger("Jump_trig");
-      dirtParticle.Stop();
-      playerAudio.PlayOneShot(jumpSound, 4.0f);
-    }
-
-    if (Input.GetKey(KeyCode.F) && !gameOver)
-    {
-      isRunning = true;
-    }
-    else
-    {
-      isRunning = false;
-    }
-
-    gameTime += Time.deltaTime;
-    if (gameTime >= 1 && !gameOver)
-    {
-      if (!isRunning)
+      if (transform.position.x < 2)
       {
-        score += 1;
-        gameTime = 0.0f;
-        Debug.Log("Score = " + score);
+        transform.Translate(Vector3.forward * Time.deltaTime);
+        playerAnimator.SetFloat("Speed_f", 0.3f);
       }
-      else if (isRunning)
+      else
       {
-        score += 3;
-        gameTime = 0.0f;
+        playerAnimator.SetFloat("Speed_f", 1.0f);
+        moveLeftScript.isWalking = false;
+      }
+    }
+    if (!moveLeftScript.isWalking)
+    {
+      if (Input.GetKeyDown(KeyCode.Space) && isOnGround > 0 && !gameOver)
+      {
+        playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        isOnGround -= 1;
+        playerAnimator.SetTrigger("Jump_trig");
+        dirtParticle.Stop();
+        playerAudio.PlayOneShot(jumpSound, 4.0f);
+      }
+
+      if (Input.GetKey(KeyCode.F) && !gameOver)
+      {
+        isRunning = true;
+      }
+      else
+      {
+        isRunning = false;
+      }
+
+      gameTime += Time.deltaTime;
+      if (gameTime >= 1 && !gameOver)
+      {
+        if (!isRunning)
+        {
+          score += 1;
+          gameTime = 0.0f;
+          Debug.Log("Score = " + score);
+        }
+        else if (isRunning)
+        {
+          score += 3;
+          gameTime = 0.0f;
+        }
       }
     }
   }

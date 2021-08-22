@@ -7,6 +7,7 @@ public class MoveLeft : MonoBehaviour
   private float speed = 30.0f;
   private float leftBoundary = -10.0f;
   private PlayerController playerControllerScript;
+  public bool isWalking = true;
   // Start is called before the first frame update
   void Start()
   {
@@ -16,6 +17,14 @@ public class MoveLeft : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    if (isWalking)
+    {
+      speed = 0.0f;
+    }
+    else
+    {
+      speed = 30.0f;
+    }
     if (playerControllerScript.isRunning && !playerControllerScript.gameOver)
     {
       transform.Translate(Vector3.left * speed * 2 * Time.deltaTime, Space.World);

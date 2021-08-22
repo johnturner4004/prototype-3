@@ -5,13 +5,15 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
   public GameObject[] obsticalPrefab;
-  public float startDelay = 2.0f;
-  public float repeatRate = 2.0f;
+  private float startDelay = 7.0f;
+  private float repeatRate = 2.0f;
   private Vector3 spawnPosition;
   private PlayerController playerControllerScript;
+  private MoveLeft moveLeftScript;
   // Start is called before the first frame update
   void Start()
   {
+    moveLeftScript = GameObject.Find("Background").GetComponent<MoveLeft>();
     InvokeRepeating("SpawnObstical", startDelay, repeatRate);
     playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
   }
@@ -24,7 +26,7 @@ public class SpawnManager : MonoBehaviour
 
   void SpawnObstical()
   {
-    if (playerControllerScript.gameOver == false)
+    if (!playerControllerScript.gameOver)
     {
       int obsticalIndex = Random.Range(0, 3);
       playerControllerScript.score += obsticalIndex * 5;
