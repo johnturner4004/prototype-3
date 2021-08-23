@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Ground
   - Obstacle
+  - Background
+  - Bomb
+  - Money
+  - SpawnScript
   layers:
   - Default
   - TransparentFX

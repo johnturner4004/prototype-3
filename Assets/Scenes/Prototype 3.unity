@@ -237,7 +237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0703a1849c2c89b4db4568688faf0c5f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0703a1849c2c89b4db4568688faf0c5f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -245,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0703a1849c2c89b4db4568688faf0c5f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0703a1849c2c89b4db4568688faf0c5f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -306,6 +306,10 @@ MonoBehaviour:
   dirtParticle: {fileID: 505759304}
   jumpSound: {fileID: 8300000, guid: 08ab7053d586c458db3774d33c141a4b, type: 3}
   crashSound: {fileID: 8300000, guid: 913d6445ee8cc4152a9c18da590ee203, type: 3}
+  score: 0
+  gameTime: 0
+  isRunning: 0
+  runPosition: {x: 2, y: 0, z: 0}
 --- !u!65 &397684893
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -800,6 +804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab774053b669c4a53b71d4aa1183f380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isWalking: 1
 --- !u!114 &835818923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,8 +863,6 @@ MonoBehaviour:
   - {fileID: 5977516828087989326, guid: 03f8ee70910d6418294668eab4160b80, type: 3}
   - {fileID: 7820258264478314971, guid: 5811b20d5451243e3b415547281382cc, type: 3}
   - {fileID: 3355347953531846621, guid: 4bf7e80c0185b4d229b4d9752f01d1f2, type: 3}
-  startDelay: 2
-  repeatRate: 2
 --- !u!4 &1506620148
 Transform:
   m_ObjectHideFlags: 0
